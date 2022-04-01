@@ -1,0 +1,55 @@
+1-Primero creo una clase Contenedor. Señalo la ruta que voy a utilzar luego con el THIS 
+como this.route. Agrego un this.id para poder inicializar el primer objeto que será leido 
+por primera vez con el save(), (en este caso comento que descubri que la clase puede ser 
+inicializada sin variables, y que puedo utilziar los THIS en cualquier metodo cuando quisiera, 
+yo pense que siempre tenia que poner las variables y que las mismas tenian que ser señaladas 
+siempre como this.variable=variable)
+2-Inicializo una clase Contenedor con el metodo new para ya tenerla creada.
+3-Creo tres objetos que voy a utilizar y a los mismos solo les agrego los nombres y el 
+precio, sin el ID ya que ese se lo agrego en el metodo save().
+4- Creo el metodo save(x), uso la x por que me parece mas comodo para reconocerla como 
+variable (en caso de no ser una buena practica, pido por favor me avise profe). Voy a mandar 
+como parametro todo el objeto, el cual va a ser identificado con la x y luego le asigno su 
+contenido a un let object para manejarme en el scout del metodo save(). Le agrego el id que 
+puse en principio en la clase (this.id) que tiene un valor un para luego ir aumentandolo.
+5- Aprendi a usar con este ejercicio el try u catch (gracias a el ejemplo que dio el profe 
+cuando resolvio el ejercicio en la ultima clase). Genero un let data para asignarle la 
+lectura del readFile colocando como ruta el this.route que coloque previamente en la clase Contenedor. 
+Todo eso no se va a leer en la primera ya que esta ruta no va a existir. La idea sera crearla. 
+Puse un log "ingreso por try" para poder reconocer en la lectura de la consola cuando se activara el TRY. 
+En este punto puse, primero, el log una linea antes que el readFile.. y me di cuenta que de esa manera 
+el TRY se activa hasta la parte en donde aparece el error y se desactiva en el momento en que se da 
+cuenta que la ruta de read no existe. Por este motivo lo puse despues del readFileSync.
+6- Genero el catch que se activa en el primer llamado del save() ya que no va a existir la 
+ruta this.route señalada en la clase. Pero la va a crear como package.json.
+7- Fui colocando un log del array que cree antes y despues del push para ver si se iban 
+agregando los elementos como yo queria y funciono todo bien. Tambien como para guiarme 
+agregue un log "---" solo para ir separando los distintos llamados que fuera haciendo 
+en el save(), no son inidispensables por eso los dejo comentados.
+8- Con el ultimo log me asegure de ver que el array se encuentra correctamente pusheado 
+con el nuevo objeto que quiero y le doy un writeFile para que se sobreescriba. 
+En este punto cometia un error y no comprendia por que se guardaba, en package.json, 
+un array con el primer objeto y un segundo array con el primer y segundo objeto 
+(y esto pasaba solo si hacia un llamado al save() dos veces, por que si lo llamaba mas de
+dos veces ya inclusive me daban mal los id). Me di cuenta que yo estaba poniendo un addFile y 
+por eso no se borraba el array guardado anteriormente, entonces se iba acumulando toda la info y se mezclaba.
+9- Por ultimo agrego un this.id++ modificando el this.id para que en la siguiente ronda 
+este valga 2, y en la siguiente 3 y asi sucesivamente.
+
+10- getById()- Comienzo poniendo como parametro a definir dentro del metodo una x. La cual voy a asignar a un let y.Como lo que tengo que traer del archivo package.json es un array creo un array vacio el cual va a ser posteriormente completado con un readFile.
+11- Creo un try y dentro de este un let data para asignar lo que se lea del archivo package.json (y que va a ser recibido como un string). Lo parseo y lo asigno al array que ya cree, que se encontraba vacio y que esta dentro del scoute general del metodo getById().
+12- hago un log para que me mantenga informado si ingresa por TRY o por CATCH. Si no se puede leer el readFile pasaria al catch con el log "catch error".
+13- Ahora necesito un objeto vacio. Creo un let object con scout global dentro del metodo para posteriormente asignarle el objeto a retornarse o dejarlo en null.
+14- Para recorrer el array que contiene los objetos leidos del package uso un forEach y dentro un if, si se cumple la condicion de ser el element.id leido igual que el let y (al cual asigne la variable x que viene por parametro al llamar al metodo) asigno el elemento leido al let object para que sea retornado en su totalidad, caso contrario este queda en null.
+
+15- deleteById()- Comienzo nuevamente creando un let array vacio, ello teniendo en cuenta que voy a necesitar eliminar un elemento del array que se encuentra guardado. Asigno a x, que viene como parametro, un let y para poder manejarlo mejor. Hago el mismo proceso que realice para los metodos anteriores  utilizando try (para el caso de leerse de manera exitosa la ruta) y el catch para el caso de no leerse la ruta.
+14- Una vez que traje el array del package.json (como tenxto plano), con parseo para poder utilizarlo como un objeto. Al tenerlo como objeto dentro de un array, uso el forEach y dentro del mismo determino que si el elemento recorrido, en su id, es igual a y (es decir al numero que se utilizo como parametro al llamar al metodo deletebyID()) que sea removido con el splice. 
+15- En el caso del splice tuve que generar un nuevo id, el cual va a ser el mismo restandole uno, esto teniendo en cuenta que el forEach empieza a contar los elementos desde el 0. 
+16- Agregue un log con un string que identifique al elemento eliminado y luego un log para que se vea como quedo el objeto sin el elemento eliminado.
+17- una vez que tengo mi nuevo objeto (con el elemento ya eliminado), lo convierto en string para guardarlo mediante writeFile.
+
+18- deletAll()- Nuevamente genero un array que sea utilizado dentro del scoute global del metodo. leo el archivo package.json y se lo asigno al Array nombrado. Luego solo reasigo ese array a uno vacio nuevamente y lo sobreescribo con el writeFile.
+19- Incorpore un log para ver el array con los objetos y luego que este queda vacio.
+
+20- Dejo los llamados de los metodos al final para ser probados de distitas maneras.
+21- Envio los archivos sin el package.json para que este sea generado con el metodo save().
